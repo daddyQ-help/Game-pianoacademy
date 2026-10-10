@@ -8,6 +8,17 @@
 .school .box{background:#b9d9fb}.petshop .box{background:#ffd5a3}.restaurant .box{background:#e7c3a0}.snack .box{background:#ffc2d9}.cafe .box{background:#c9e6b5}
 html,body,.game,.viewport,.world,.controls,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 input{user-select:text;-webkit-user-select:text;touch-action:auto}
+
+/* Pixel character art from approved concept sheet */
+.player .face,.npc .face{font-size:0!important;width:64px;height:70px;display:block;background-size:contain;background-position:center bottom;background-repeat:no-repeat;image-rendering:pixelated}
+.player .face{background-image:url('./hero_front.png')}
+.npc[data-id="girl"] .face,.npc[data-id="friend"] .face,.npc[data-id="boy"] .face{background-image:url('./hero_front.png')}
+.npc[data-id="rabbit"] .face{background-image:url('./rabbit0.png')}
+.npc[data-id="squirrel"] .face{background-image:url('./squirrel0.png')}
+.npc[data-id="cat"] .face{background-image:url('./cat0.png')}
+.npc[data-id="dog"] .face{background-image:url('./dog0.png')}
+.companion{font-size:0!important;width:56px;height:62px;background-size:contain;background-position:center bottom;background-repeat:no-repeat;image-rendering:pixelated}
+.portrait{font-size:0!important;background-size:contain;background-repeat:no-repeat;background-position:center}
 </style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
 <div class="path h"></div><div class="path v"></div><div class="path p2"></div><div class="water"></div>
 <div class="building home"><div class="box">🏠</div><small>🏠 HOME</small></div><div class="building shop"><div class="box">🛒</div><small>SUPERMARKET</small></div><div class="building bakery"><div class="box">🥐</div><small>🥐 BAKERY</small></div><div class="building academy"><div class="box">🎹</div><small>🎹 PIANO</small></div><div class="building school"><div class="box">🏫</div><small>🏫 SCHOOL</small></div>
@@ -30,7 +41,7 @@ let bonusReady=false,bonusActive=false,bonusWon=false,pet=null;
 const pets=[['rabbit','🐰','토끼'],['squirrel','🐿️','다람쥐'],['cat','🐱','고양이'],['dog','🐶','강아지']];
 try{pet=localStorage.getItem('pianoRoadPet')||null}catch(e){}
 let trail=[];const companion=$('companion');
-function updatePet(){if(!pet){companion.style.display='none';return}const found=pets.find(a=>a[0]===pet);if(!found)return;companion.textContent=found[1];companion.style.display='block';const at=trail[Math.max(0,trail.length-5)]||{x:px-55,y:py+12};companion.style.left=at.x+'px';companion.style.top=at.y+'px'}
+function updatePet(){if(!pet){companion.style.display='none';return}const found=pets.find(a=>a[0]===pet);if(!found)return;companion.textContent='';companion.style.display='block';const at=trail[Math.max(0,trail.length-5)]||{x:px-55,y:py+12};companion.style.left=at.x+'px';companion.style.top=at.y+'px'}
 function choosePet(){bonusActive=false;bonusWon=true;say({face:'🐿️',name:'다람쥐'},'우와! 정답이야! 이제 어떤 동물 친구와 함께 갈래?');pets.forEach(([id,emoji,name])=>{const b=button(emoji+' '+name,()=>{pet=id;try{localStorage.setItem('pianoRoadPet',id)}catch(e){};trail=[{x:px-55,y:py+12}];updatePet();say({face:emoji,name:name},'야호! 이제부터 내가 뒤를 따라갈게! 💛');button('함께 출발!',closeDialog)});b.classList.add('pet-card')})}
 function bonusQuestion(){bonusActive=true;const n={face:'🐿️',name:'특별한 다람쥐'};let tries=0;
  function show(hint=''){say(n,'특별한 문제! 도토리 10개가 있어. 3개를 친구에게 주면 몇 개가 남을까?');const inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.maxLength=3;inp.placeholder='정답';inp.setAttribute('aria-label','보너스 문제 답');inp.style.cssText='width:100px;height:48px;flex:none;font-size:22px;padding:8px;border:3px solid #754d36;border-radius:8px';choices.appendChild(inp);const pad=document.createElement('div');pad.className='pad';choices.appendChild(pad);for(const v of ['1','2','3','4','5','6','7','8','9','←','0','지우기']){const b=document.createElement('button');b.textContent=v;b.type='button';b.addEventListener('click',()=>{if(v==='←')inp.value=inp.value.slice(0,-1);else if(v==='지우기')inp.value='';else if(inp.value.length<3)inp.value+=v});pad.appendChild(b)}
@@ -81,9 +92,9 @@ function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function camera(){const vw=vp.clientWidth,vh=vp.clientHeight;world.style.transform=`translate(${-clamp(px-vw/2+29,0,Math.max(0,1800-vw))}px,${-clamp(py-vh/2+36,0,Math.max(0,1120-vh))}px)`}
 function setPlayer(){player.style.left=px+'px';player.style.top=py+'px';trail.push({x:px,y:py});if(trail.length>15)trail.shift();updatePet();camera();checkAuto()}
 function collides(nx,ny){return [[75,135,215,185],[495,65,225,190],[855,140,225,190],[1460,95,270,230],[60,720,510,330],[565,790,200,190],[780,790,200,190],[995,790,200,190],[1210,790,200,190],[1425,790,200,190]].some(([x,y,w,h])=>nx+50>x&&nx<x+w&&ny+65>y&&ny<y+h)}
-function move(dx,dy){if(locked)return;const nx=clamp(px+dx*speed,0,1740),ny=clamp(py+dy*speed,0,1040);if(!collides(nx,ny)){px=nx;py=ny;setPlayer()}}
+function move(dx,dy){if(locked)return;heroDir=dy<0?'back':'front';heroMovingUntil=Date.now()+280;const nx=clamp(px+dx*speed,0,1740),ny=clamp(py+dy*speed,0,1040);if(!collides(nx,ny)){px=nx;py=ny;setPlayer()}}
 function nearest(){let best=null,dist=1e9;Object.entries(npcs).forEach(([id,n])=>{let d=Math.hypot(px-n.x,py-n.y);if(d<dist){dist=d;best=id}});return dist<115?best:null}
-function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
+function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'rabbit0','🐿️':'squirrel0','🐱':'cat0','🐶':'dog0','👧🏻':'hero_front','👧🏽':'hero_front','🧒🏻':'hero_front'})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
 function button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);choices.appendChild(b);return b}
 function closeDialog(){dialog.classList.remove('show');locked=false;afterDialog()}
 function modeFor(id){if(!questionModes[id]){questionModeCount++;questionModes[id]=(questionModeCount%4===0)?'required':'optional';}return questionModes[id]}
@@ -116,6 +127,16 @@ function checkAuto(){Object.entries(npcs).forEach(([id,n])=>{if(n.auto&&!autoSee
 function flash(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1200)}
 document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('click',()=>move(+b.dataset.dx,+b.dataset.dy)));$('talk').addEventListener('click',()=>{if(locked)return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});document.querySelectorAll('.npc').forEach(b=>b.addEventListener('click',()=>{if(locked)return;const id=b.dataset.id,n=npcs[id];Math.hypot(px-n.x,py-n.y)<135?talk(id):flash('가까이 가서 말을 걸어보자!')}));window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(locked){if(e.key==='Escape')closeDialog();return}const k={ArrowUp:[0,-1],w:[0,-1],W:[0,-1],ArrowDown:[0,1],s:[0,1],S:[0,1],ArrowLeft:[-1,0],a:[-1,0],A:[-1,0],ArrowRight:[1,0],d:[1,0],D:[1,0]};if(k[e.key]){e.preventDefault();move(...k[e.key])}else if(e.key==='Enter'||e.key===' '){const id=nearest();id?talk(id):flash('주변에 이야기할 친구가 없어!')}});document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
+
+const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',girl:'hero',friend:'hero',boy:'hero'};
+let heroDir='front',heroMovingUntil=0,frameIndex=0;
+function spriteTick(){frameIndex++;const moving=Date.now()<heroMovingUntil;
+ const heroFrame=moving?'hero_walk'+(frameIndex%4):(heroDir==='back'?'hero_back':'hero_front');
+ const hface=player.querySelector('.face');if(hface)hface.style.backgroundImage="url('./"+heroFrame+".png')";
+ document.querySelectorAll('.npc').forEach((el,i)=>{const type=spriteTypes[el.dataset.id];if(!type)return;const frame=type==='hero'?'hero_front':type+Math.floor((frameIndex+i*2)/3)%4;el.querySelector('.face').style.backgroundImage="url('./"+frame+".png')"});
+ if(pet){const type=pets.find(x=>x[0]===pet)?.[0];if(type)companion.style.backgroundImage="url('./"+type+(frameIndex%4)+".png')"}
+}
+setInterval(spriteTick,165);spriteTick();
 window.addEventListener('resize',camera);setPlayer();setTimeout(()=>{say({face:'👩🏻',name:'엄마'},'피아노 학원 잘 다녀와! 친구들을 만나면 인사도 해보렴.');button('응! 다녀올게!',closeDialog);button('엄마, 이따 봐!',closeDialog)},350);
 })();
 </script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').then(async reg=>{try{await reg.update()}catch(e){} }).catch(err=>console.warn('Offline setup:',err))})}</script></body></html>
