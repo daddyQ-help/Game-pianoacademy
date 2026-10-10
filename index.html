@@ -29,7 +29,7 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 .hair-overlay{position:fixed;inset:0;z-index:100;background:#3327199e;display:none;align-items:center;justify-content:center;padding:12px}.hair-overlay.active{display:flex}
 .hair-panel{width:min(740px,100%);max-height:90dvh;overflow:auto;background:#fff7de;border:5px solid #714b34;border-radius:20px;padding:16px;color:#60402d;box-shadow:0 8px #a5744e}
 .hair-heading{font-weight:1000;font-size:23px;margin-bottom:4px}.hair-note{font-size:14px;margin-bottom:12px}
-.hair-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.hair-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
 .hair-option{min-width:0;background:#fff0cf;border:3px solid #e0caa7;border-radius:12px;padding:5px 2px;color:#593a29;font-weight:900;display:flex;flex-direction:column;align-items:center}
 .hair-option.selected{border-color:#e9a937;background:#ffe6a2}.hair-option img{height:100px;width:100%;object-fit:contain;image-rendering:pixelated}.hair-option span{font-size:12px;white-space:nowrap}
 .hair-actions{display:flex;justify-content:center;gap:10px;margin-top:16px}.hair-actions button{background:#ffe6a2;border:3px solid #754d36;border-radius:12px;padding:10px 15px;font-weight:900;color:#5b3a29}
@@ -148,9 +148,9 @@ document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('cli
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
 
 const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',};
-const hairNames=['긴머리','긴 생머리','단발머리','대머리','모히칸'];
+const hairNames=['긴머리','긴 생머리','단발머리'];
 let hairStyle=0,hairDraft=0,hairFirst=false;
-try{const saved=localStorage.getItem('pianoRoadHairStyle');if(saved!==null){hairStyle=Math.max(0,Math.min(4,Number(saved)||0));hairFirst=true}}catch(e){}
+try{const saved=localStorage.getItem('pianoRoadHairStyle');if(saved!==null){hairStyle=Math.max(0,Math.min(2,Number(saved)||0));hairFirst=true}}catch(e){}
 const hairOverlay=$('hairOverlay'),hairOptions=$('hairOptions');
 function renderHairOptions(){hairOptions.innerHTML='';hairNames.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className='hair-option'+(i===hairDraft?' selected':'');const im=document.createElement('img');im.src='./hair'+i+'_thumb.png';im.alt=name;const label=document.createElement('span');label.textContent=name;b.append(im,label);b.addEventListener('click',()=>{hairDraft=i;renderHairOptions()});hairOptions.appendChild(b)})}
 function showHair(){hairDraft=hairStyle;renderHairOptions();hairOverlay.classList.add('active');locked=true}
