@@ -8,7 +8,7 @@
 .school .box{background:#b9d9fb}.petshop .box{background:#ffd5a3}.restaurant .box{background:#e7c3a0}.snack .box{background:#ffc2d9}.cafe .box{background:#c9e6b5}
 html,body,.game,.viewport,.world,.controls,button{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 input{user-select:text;-webkit-user-select:text;touch-action:auto}
-</style></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
 <div class="path h"></div><div class="path v"></div><div class="path p2"></div><div class="water"></div>
 <div class="building home"><div class="box">🏠</div><small>🏠 HOME</small></div><div class="building shop"><div class="box">🛒</div><small>SUPERMARKET</small></div><div class="building bakery"><div class="box">🥐</div><small>🥐 BAKERY</small></div><div class="building academy"><div class="box">🎹</div><small>🎹 PIANO</small></div><div class="building school"><div class="box">🏫</div><small>🏫 SCHOOL</small></div>
 <div class="building petshop"><div class="box">🐾</div><small>🐾 PET SHOP</small></div>
@@ -118,4 +118,4 @@ document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('cli
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
 window.addEventListener('resize',camera);setPlayer();setTimeout(()=>{say({face:'👩🏻',name:'엄마'},'피아노 학원 잘 다녀와! 친구들을 만나면 인사도 해보렴.');button('응! 다녀올게!',closeDialog);button('엄마, 이따 봐!',closeDialog)},350);
 })();
-</script></body></html>
+</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').then(async reg=>{try{await reg.update()}catch(e){} }).catch(err=>console.warn('Offline setup:',err))})}</script></body></html>
