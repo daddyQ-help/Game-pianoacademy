@@ -43,10 +43,32 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 .quest,.hint{font-size:12px;max-width:45%;box-shadow:0 3px #8f6a4a}
 .hair-open{top:auto!important;bottom:10px;left:50%;right:auto!important;transform:translateX(-50%);font-size:12px;white-space:nowrap}
 @media(max-width:600px){.hair-open{bottom:9px}.hint{display:none}.quest{max-width:65%;font-size:11px}}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
-<button class="npc" data-id="girl" style="left:490px;top:420px"><span class="face">👧🏻</span><span class="bubble">…</span></button><button class="npc" data-id="rabbit" style="left:705px;top:330px"><span class="face">🐰</span><span class="bubble">?</span></button><button class="npc" data-id="squirrel" style="left:1480px;top:1000px"><span class="face">🐿️</span><span class="bubble">!</span></button><button class="npc" data-id="cat" style="left:980px;top:355px"><span class="face">🐱</span></button><button class="npc" data-id="boy" style="left:620px;top:735px"><span class="face">🧒🏻</span><span class="bubble">♪</span></button>
-<button class="npc" data-id="dog" style="left:220px;top:390px"><span class="face">🐶</span><span class="bubble">…</span></button><button class="npc" data-id="fox" style="left:1170px;top:710px"><span class="face">🦊</span><span class="bubble">?</span></button><button class="npc" data-id="duck" style="left:880px;top:990px"><span class="face">🦆</span></button><button class="npc" data-id="hedgehog" style="left:450px;top:1020px"><span class="face">🦔</span></button><button class="npc" data-id="friend" style="left:520px;top:845px"><span class="face">👧🏽</span><span class="bubble">…</span></button><button class="npc" data-id="bear" style="left:1410px;top:420px"><span class="face">🐻</span></button><button class="npc" data-id="bird" style="left:1100px;top:980px"><span class="face">🐦</span></button><div id="companion" class="companion" style="display:none">🐰</div><div class="player" id="player" style="left:245px;top:520px"><span class="face">👧🏻</span></div></div>
-<div class="quest" id="quest">① HOME 출발 → ② PIANO ACADEMY</div><div class="hint">가까이 가서 A · 화살표/WASD 이동</div><div class="toast" id="toast"></div><div class="controls"><button class="up" data-dx="0" data-dy="-1">▲</button><button class="left" data-dx="-1" data-dy="0">◀</button><button class="down" data-dx="0" data-dy="1">▼</button><button class="right" data-dx="1" data-dy="0">▶</button></div><button class="talk" id="talk">A</button>
+
+/* Native-feeling analog touch joystick */
+.joystick{position:absolute;left:20px;bottom:24px;width:138px;height:138px;border-radius:50%;z-index:25;touch-action:none;user-select:none;background:rgba(255,241,202,.75);border:5px solid rgba(104,71,51,.9);box-shadow:0 5px 0 #946f50,inset 0 0 0 9px #ffe8af77;display:grid;place-items:center}
+.joystick-ring{width:80%;height:80%;border-radius:50%;border:2px dashed #986f55aa;pointer-events:none}
+.joystick-knob{position:absolute;left:50%;top:50%;width:60px;height:60px;transform:translate(-50%,-50%);border-radius:50%;background:linear-gradient(#ffeec5,#e9ba78);border:4px solid #704a34;box-shadow:0 3px 3px #704a3455;pointer-events:none}
+.npc{width:72px!important;height:76px!important;opacity:0!important;z-index:9!important}
+.player .face{background-color:transparent}
+@media(max-width:600px){.joystick{width:118px;height:118px;left:12px;bottom:18px}.joystick-knob{width:52px;height:52px}.dialog{bottom:118px}}
+.map-renumber{position:absolute;z-index:3;background:#65402b;color:#fff7d8;border:4px solid #fff0cb;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;font-size:16px;font-weight:1000;box-shadow:0 0 0 2px #6d4932}.academy-number{left:535px;top:171px}.park-number{left:1535px;top:885px}
+.npc{opacity:1!important;filter:drop-shadow(0 3px 2px #56382088)!important}
+.npc .face{display:block!important;font-size:0!important;background-size:contain!important;background-repeat:no-repeat!important;background-position:center bottom!important;width:72px!important;height:78px!important}
+.npc[data-id="rabbit"] .face{background-image:url('./npc_rabbit.png')!important}
+.npc[data-id="squirrel"] .face{background-image:url('./npc_squirrel.png')!important}
+.npc[data-id="cat"] .face{background-image:url('./npc_cat.png')!important}
+.npc[data-id="dog"] .face{background-image:url('./npc_dog.png')!important}
+.npc[data-id="fox"] .face{background-image:url('./npc_fox.png')!important}
+.npc[data-id="bear"] .face{background-image:url('./npc_bear.png')!important}
+.npc[data-id="duck"] .face{background-image:url('./npc_penguin.png')!important}
+.npc[data-id="girl"] .face{background-image:url('./npc_girl.png')!important}
+.npc .bubble{font-size:15px!important}.npc[data-id='boy'],.npc[data-id='friend'],.npc[data-id='hedgehog'],.npc[data-id='bird']{opacity:0!important}
+@keyframes npcIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.npc .face{animation:npcIdle 1.3s ease-in-out infinite}
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world"><div class="map-renumber academy-number">12</div><div class="map-renumber park-number">2</div>
+<button class="npc" data-id="girl" style="left:330px;top:410px" aria-label="동물 친구 girl"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="rabbit" style="left:750px;top:490px" aria-label="동물 친구 rabbit"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="squirrel" style="left:865px;top:595px" aria-label="동물 친구 squirrel"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="cat" style="left:1090px;top:410px" aria-label="동물 친구 cat"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="boy" style="left:610px;top:820px" aria-label="동물 친구 boy"><span class="face"></span><span class="bubble">…</span></button>
+<button class="npc" data-id="dog" style="left:420px;top:640px" aria-label="동물 친구 dog"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="fox" style="left:1170px;top:795px" aria-label="동물 친구 fox"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="duck" style="left:780px;top:1000px" aria-label="동물 친구 duck"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="hedgehog" style="left:350px;top:980px" aria-label="동물 친구 hedgehog"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="friend" style="left:560px;top:970px" aria-label="동물 친구 friend"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="bear" style="left:1470px;top:510px" aria-label="동물 친구 bear"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="bird" style="left:1150px;top:970px" aria-label="동물 친구 bird"><span class="face"></span><span class="bubble">…</span></button><div id="companion" class="companion" style="display:none">🐰</div><div class="player" id="player" style="left:235px;top:380px"><span class="face">👧🏻</span></div></div>
+<div class="quest" id="quest">① HOME 출발 → ⑫ PIANO ACADEMY</div><div class="hint">왼쪽 원형 패드로 이동 · A 대화</div><div class="toast" id="toast"></div><div class="joystick" id="joystick" aria-label="이동 조이스틱"><div class="joystick-ring"></div><div class="joystick-knob" id="joystickKnob"></div></div><button class="talk" id="talk">A</button>
 <div class="dialog" id="dialog"><div class="drow"><div class="portrait" id="portrait">👧🏻</div><div><div class="speaker" id="speaker">나</div><div class="text" id="dialogText"></div><div class="choices" id="choices"></div></div></div></div></div></div></div>
 <button id="changeHair" class="hair-open" type="button">✂️ 머리 바꾸기</button>
 <div id="hairOverlay" class="hair-overlay" role="dialog" aria-modal="true" aria-label="머리 스타일 선택"><div class="hair-panel">
@@ -55,7 +77,7 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 <script>
 (()=>{
 const $=id=>document.getElementById(id), world=$('world'),vp=$('viewport'),player=$('player'),dialog=$('dialog'),portrait=$('portrait'),speaker=$('speaker'),text=$('dialogText'),choices=$('choices'),toast=$('toast'),count=$('talkCount');
-let px=340,py=370,locked=false,talks=0,firstQuestion=true,answered=0;const speed=20,autoSeen={},completed={}; const questionModes={}; let questionModeCount=0;
+let px=235,py=380,locked=false,talks=0,firstQuestion=true,answered=0;const speed=20,autoSeen={},completed={}; const questionModes={}; let questionModeCount=0;
 let bonusReady=false,bonusActive=false,bonusWon=false,pet=null;
 const pets=[['rabbit','🐰','토끼'],['squirrel','🐿️','다람쥐'],['cat','🐱','고양이'],['dog','🐶','강아지']];
 try{pet=localStorage.getItem('pianoRoadPet')||null}catch(e){}
@@ -94,33 +116,38 @@ function basicQuestion(){
 }
 function questionFor(n){return Math.random()<.25?fruitQuestion():basicQuestion()}
 const npcs={
- girl:{x:490,y:420,face:'👧🏻',name:'작은 여자아이',auto:false,start:'언니… 나 좀 도와줄래?',options:['무슨 일이야?','괜찮아?'],question:{story:'스티커가 15개 있었는데 친구가 5개를 더 줬어. 지금 스티커는 모두 몇 개일까?',answer:20},reply:'언니 덕분에 알았어! 고마워~'},
- rabbit:{x:705,y:330,face:'🐰',name:'토끼',auto:false,start:'당근을 세다가 헷갈렸어!',options:['내가 도와줄게!','몇 개 있는데?'],question:{story:'당근 24개 중에서 6개를 먹었어. 몇 개 남았을까?',answer:18},reply:'와! 정말 고마워!'},
- squirrel:{x:1480,y:1000,face:'🐿️',name:'다람쥐',auto:true,start:'저기! 도토리 계산을 좀 도와줘!',options:['무슨 일이야?','도토리가 몇 개야?'],question:{story:'도토리 37개를 모았는데 12개를 친구에게 주었어. 그 뒤 4개를 더 주웠다면 지금 몇 개일까?',answer:29},reply:'이제 알겠어! 고마워!'},
- cat:{x:980,y:355,face:'🐱',name:'고양이',auto:false,start:'야옹! 연못이 정말 예쁘지?',options:['응! 예쁘다.','물고기도 있어?'],reply:'야옹~ 오늘도 좋은 하루!'},
- boy:{x:620,y:735,face:'🧒🏻',name:'피아노 친구',auto:true,start:'너도 피아노 학원 가? 난 조금 어려운 문제가 있어.',options:['같이 풀어볼까?','어떤 문제인데?'],question:{story:'학원에 연필이 46자루 있었어. 18자루를 나누어 주고 7자루를 새로 샀다면 몇 자루가 있을까?',answer:35},reply:'우와, 덕분에 해결했어!'},
- dog:{x:220,y:390,face:'🐶',name:'강아지',auto:false,start:'멍멍! 내 공을 봤니?',options:['같이 찾아보자.','무슨 색 공이야?'],reply:'노란 공이야! 찾아봐 줘서 고마워!'},
- fox:{x:1170,y:710,face:'🦊',name:'여우',auto:true,start:'잠깐! 사과를 세는 게 헷갈려.',options:['도와줄게!','사과가 몇 개야?'],question:{story:'사과가 28개 있었는데 17개를 더 받았어. 모두 몇 개가 되었을까?',answer:45},reply:'고마워! 이제 셀 수 있겠어.'},
- duck:{x:880,y:990,face:'🦆',name:'오리',auto:false,start:'꽥! 연못으로 산책 나왔어.',options:['안녕!','물은 시원해?'],reply:'꽥꽥! 정말 시원해.'},
- hedgehog:{x:450,y:1020,face:'🦔',name:'고슴도치',auto:false,start:'내가 모은 열매가 몇 개일까?',options:['같이 세자!','어디에 모았어?'],question:{story:'열매 19개에 11개를 더 모았어. 지금 몇 개일까?',answer:30},reply:'맞아! 정말 고마워.'},
- friend:{x:520,y:845,face:'👧🏽',name:'동네 친구',auto:false,start:'언니! 내 색연필 계산 좀 알려줘.',options:['응, 말해봐!','무슨 색연필이야?'],question:{story:'색연필이 53자루 있었는데 19자루를 친구에게 빌려줬어. 친구가 5자루를 돌려줬다면 지금 몇 자루일까?',answer:39},reply:'와! 덕분에 해결했어!'},
- bear:{x:1410,y:420,face:'🐻',name:'곰',auto:false,start:'안녕! 빵 냄새 좋지?',options:['정말 맛있겠다!','무슨 빵이야?'],reply:'꿀빵이야! 좋은 하루 보내~'},
- bird:{x:1100,y:980,face:'🐦',name:'작은 새',auto:true,start:'짹짹! 노래 부르러 가는 길이야.',options:['어떤 노래야?','같이 불러볼까?'],reply:'짹짹♪ 도레미~ 피아노 잘 치고 와!'}
+ girl:{x:330,y:410,face:'👧🏻',name:'작은 여자아이',auto:false,start:'언니… 나 좀 도와줄래?',options:['무슨 일이야?','괜찮아?'],question:{story:'스티커가 15개 있었는데 친구가 5개를 더 줬어. 지금 스티커는 모두 몇 개일까?',answer:20},reply:'언니 덕분에 알았어! 고마워~'},
+ rabbit:{x:750,y:490,face:'🐰',name:'토끼',auto:false,start:'당근을 세다가 헷갈렸어!',options:['내가 도와줄게!','몇 개 있는데?'],question:{story:'당근 24개 중에서 6개를 먹었어. 몇 개 남았을까?',answer:18},reply:'와! 정말 고마워!'},
+ squirrel:{x:865,y:595,face:'🐿️',name:'다람쥐',auto:true,start:'저기! 도토리 계산을 좀 도와줘!',options:['무슨 일이야?','도토리가 몇 개야?'],question:{story:'도토리 37개를 모았는데 12개를 친구에게 주었어. 그 뒤 4개를 더 주웠다면 지금 몇 개일까?',answer:29},reply:'이제 알겠어! 고마워!'},
+ cat:{x:1090,y:410,face:'🐱',name:'고양이',auto:false,start:'야옹! 연못이 정말 예쁘지?',options:['응! 예쁘다.','물고기도 있어?'],reply:'야옹~ 오늘도 좋은 하루!'},
+ boy:{x:610,y:820,face:'🧒🏻',name:'피아노 친구',auto:true,start:'너도 피아노 학원 가? 난 조금 어려운 문제가 있어.',options:['같이 풀어볼까?','어떤 문제인데?'],question:{story:'학원에 연필이 46자루 있었어. 18자루를 나누어 주고 7자루를 새로 샀다면 몇 자루가 있을까?',answer:35},reply:'우와, 덕분에 해결했어!'},
+ dog:{x:420,y:640,face:'🐶',name:'강아지',auto:false,start:'멍멍! 내 공을 봤니?',options:['같이 찾아보자.','무슨 색 공이야?'],reply:'노란 공이야! 찾아봐 줘서 고마워!'},
+ fox:{x:1170,y:795,face:'🦊',name:'여우',auto:true,start:'잠깐! 사과를 세는 게 헷갈려.',options:['도와줄게!','사과가 몇 개야?'],question:{story:'사과가 28개 있었는데 17개를 더 받았어. 모두 몇 개가 되었을까?',answer:45},reply:'고마워! 이제 셀 수 있겠어.'},
+ duck:{x:780,y:1000,face:'🦆',name:'오리',auto:false,start:'꽥! 연못으로 산책 나왔어.',options:['안녕!','물은 시원해?'],reply:'꽥꽥! 정말 시원해.'},
+ hedgehog:{x:350,y:980,face:'🦔',name:'고슴도치',auto:false,start:'내가 모은 열매가 몇 개일까?',options:['같이 세자!','어디에 모았어?'],question:{story:'열매 19개에 11개를 더 모았어. 지금 몇 개일까?',answer:30},reply:'맞아! 정말 고마워.'},
+ friend:{x:560,y:970,face:'👧🏽',name:'동네 친구',auto:false,start:'언니! 내 색연필 계산 좀 알려줘.',options:['응, 말해봐!','무슨 색연필이야?'],question:{story:'색연필이 53자루 있었는데 19자루를 친구에게 빌려줬어. 친구가 5자루를 돌려줬다면 지금 몇 자루일까?',answer:39},reply:'와! 덕분에 해결했어!'},
+ bear:{x:1470,y:510,face:'🐻',name:'곰',auto:false,start:'안녕! 빵 냄새 좋지?',options:['정말 맛있겠다!','무슨 빵이야?'],reply:'꿀빵이야! 좋은 하루 보내~'},
+ bird:{x:1150,y:970,face:'🐦',name:'작은 새',auto:true,start:'짹짹! 노래 부르러 가는 길이야.',options:['어떤 노래야?','같이 불러볼까?'],reply:'짹짹♪ 도레미~ 피아노 잘 치고 와!'}
 };
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function camera(){const vw=vp.clientWidth,vh=vp.clientHeight;world.style.transform=`translate(${-clamp(px-vw/2+29,0,Math.max(0,1800-vw))}px,${-clamp(py-vh/2+36,0,Math.max(0,1200-vh))}px)`}
-function setPlayer(){player.style.left=px+'px';player.style.top=py+'px';trail.push({x:px,y:py});if(trail.length>15)trail.shift();updatePet();camera();checkAuto();if(px>540&&px<775&&py>305&&py<405&&!window.__pianoArrived){window.__pianoArrived=true;flash("🎹 PIANO ACADEMY 도착! 잘했어!")}}
+function setPlayer(){player.style.left=px+'px';player.style.top=py+'px';trail.push({x:px,y:py});if(trail.length>15)trail.shift();updatePet();camera();checkAuto();if(px>540&&px<780&&py>305&&py<435&&!window.__pianoArrived){window.__pianoArrived=true;flash("🎹 PIANO ACADEMY 도착! 잘했어!")}}
 function collides(nx,ny){
- const cx=nx+29,cy=ny+60;
- const walls=[
- [0,105,335,275],[440,80,320,230],[800,130,360,220],[1230,145,300,205],[1535,260,265,220],
- [0,520,365,190],[1030,515,245,175],[1350,530,400,180],
- [0,830,345,230],[390,860,290,220],[950,890,350,220]
- ];
- // Buildings and decorative river zones; bridges and paths remain passable
- return walls.some(([x,y,w,h])=>cx>x&&cx<x+w&&cy>y&&cy<y+h)
+ const cx=nx+29,cy=ny+64;
+ const solids=[[0,100,285,185],[480,85,290,165],[820,125,310,150],[1270,155,270,130],[1545,275,255,125],[0,520,310,110],[1030,510,260,95],[1390,540,360,110],[0,850,280,105],[405,850,280,100],[980,850,280,110]];
+ return solids.some(([x,y,w,h])=>cx>x&&cx<x+w&&cy>y&&cy<y+h)
 }
-function move(dx,dy){if(locked)return;heroDir=dy<0?'back':'front';heroMovingUntil=Date.now()+280;const nx=clamp(px+dx*speed,0,1740),ny=clamp(py+dy*speed,0,1130);if(!collides(nx,ny)){px=nx;py=ny;setPlayer()}}
+function move(dx,dy,amount=20){
+ if(locked)return;
+ const len=Math.hypot(dx,dy);if(len<.01)return;
+ dx/=Math.max(1,len);dy/=Math.max(1,len);
+ heroDir=dy<-.2?'back':'front';heroMovingUntil=Date.now()+240;
+ const nx=clamp(px+dx*amount,0,1740),ny=clamp(py+dy*amount,0,1130);
+ // Axis separated to slide smoothly along fences/walls
+ if(!collides(nx,py))px=nx;
+ if(!collides(px,ny))py=ny;
+ setPlayer();
+}
 function nearest(){let best=null,dist=1e9;Object.entries(npcs).forEach(([id,n])=>{let d=Math.hypot(px-n.x,py-n.y);if(d<dist){dist=d;best=id}});return dist<115?best:null}
 function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'rabbit0','🐿️':'squirrel0','🐱':'cat0','🐶':'dog0',})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
 function button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);choices.appendChild(b);return b}
@@ -153,7 +180,31 @@ function inputQuestion(n,q){
 function talk(id){if(locked)return;const n=npcs[id];talks++;count.textContent=talks;say(n,n.start);if(completed[id]){text.textContent='아까 도와줘서 고마워! 또 만나자~';button('안녕!',closeDialog);return}n.options.slice(0,3).forEach((label,i)=>button(label,()=>{if(n.question){const q=firstQuestion?{story:'사과가 8개 있었는데 5개를 더 받았어. 모두 몇 개일까?',answer:13}:questionFor(n);firstQuestion=false;inputQuestion(n,q)}else{say(n,n.reply);button('안녕!',closeDialog)}}))}
 function checkAuto(){Object.entries(npcs).forEach(([id,n])=>{if(n.auto&&!autoSeen[id]&&Math.hypot(px-n.x,py-n.y)<125&&!locked){autoSeen[id]=true;talk(id)}})}
 function flash(msg){toast.textContent=msg;toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),1200)}
-document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('click',()=>move(+b.dataset.dx,+b.dataset.dy)));$('talk').addEventListener('click',()=>{if(locked)return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});document.querySelectorAll('.npc').forEach(b=>b.addEventListener('click',()=>{if(locked)return;const id=b.dataset.id,n=npcs[id];Math.hypot(px-n.x,py-n.y)<135?talk(id):flash('가까이 가서 말을 걸어보자!')}));window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(locked){if(e.key==='Escape')closeDialog();return}const k={ArrowUp:[0,-1],w:[0,-1],W:[0,-1],ArrowDown:[0,1],s:[0,1],S:[0,1],ArrowLeft:[-1,0],a:[-1,0],A:[-1,0],ArrowRight:[1,0],d:[1,0],D:[1,0]};if(k[e.key]){e.preventDefault();move(...k[e.key])}else if(e.key==='Enter'||e.key===' '){const id=nearest();id?talk(id):flash('주변에 이야기할 친구가 없어!')}});document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+const stick=$('joystick'),knob=$('joystickKnob');
+let stickPointer=null,stickX=0,stickY=0;const pressed=new Set();
+function resetStick(){stickPointer=null;stickX=stickY=0;knob.style.transform='translate(-50%,-50%)'}
+function updateStick(e){const r=stick.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+ const dx=e.clientX-cx,dy=e.clientY-cy,limit=r.width*.31,dist=Math.hypot(dx,dy),ratio=dist>limit?limit/dist:1;
+ const vx=dx*ratio,vy=dy*ratio;stickX=vx/limit;stickY=vy/limit;
+ knob.style.transform=`translate(calc(-50% + ${vx}px),calc(-50% + ${vy}px))`;
+}
+stick.addEventListener('pointerdown',e=>{e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);updateStick(e)});
+stick.addEventListener('pointermove',e=>{if(e.pointerId===stickPointer){e.preventDefault();updateStick(e)}});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(event,e=>{if(e.pointerId===stickPointer)resetStick()});
+$('talk').addEventListener('click',()=>{if(locked)return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});
+document.querySelectorAll('.npc').forEach(b=>b.addEventListener('click',()=>{if(locked)return;const id=b.dataset.id,n=npcs[id];Math.hypot(px-n.x,py-n.y)<135?talk(id):flash('가까이 가서 말을 걸어보자!')}));
+window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(locked){if(e.key==='Escape')closeDialog();return}
+ const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright','w','a','s','d'].includes(k)){e.preventDefault();pressed.add(k)}
+ else if(e.key==='Enter'||e.key===' '){e.preventDefault();const id=nearest();id?talk(id):flash('주변에 이야기할 친구가 없어!')}});
+window.addEventListener('keyup',e=>pressed.delete(e.key.toLowerCase()));
+window.addEventListener('blur',()=>{pressed.clear();resetStick()});
+let prev=performance.now();function frame(now){const dt=Math.min((now-prev)/1000,.05);prev=now;
+ if(!locked){let x=stickX,y=stickY;
+ if(pressed.has('arrowleft')||pressed.has('a'))x-=1;if(pressed.has('arrowright')||pressed.has('d'))x+=1;
+ if(pressed.has('arrowup')||pressed.has('w'))y-=1;if(pressed.has('arrowdown')||pressed.has('s'))y+=1;
+ if(Math.hypot(x,y)>.12)move(x,y,dt*170*Math.min(1,Math.hypot(x,y)))}
+ requestAnimationFrame(frame)}requestAnimationFrame(frame);
+document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
 
 const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',};
@@ -170,7 +221,7 @@ let heroDir='front',heroMovingUntil=0,frameIndex=0;
 function spriteTick(){frameIndex++;const moving=Date.now()<heroMovingUntil;
  const heroFrame='hair'+hairStyle+'_'+(moving?'walk'+(frameIndex%4):'front');
  const hface=player.querySelector('.face');if(hface)hface.style.backgroundImage="url('./"+heroFrame+".png')";
- document.querySelectorAll('.npc').forEach((el,i)=>{const type=spriteTypes[el.dataset.id];if(!type)return;const frame=type+Math.floor((frameIndex+i*2)/3)%4;el.querySelector('.face').style.backgroundImage="url('./"+frame+".png')"});
+ 
  if(pet){const type=pets.find(x=>x[0]===pet)?.[0];if(type)companion.style.backgroundImage="url('./"+type+(frameIndex%4)+".png')"}
 }
 setInterval(spriteTick,165);spriteTick();
