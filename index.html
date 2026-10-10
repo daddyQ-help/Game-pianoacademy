@@ -12,13 +12,19 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 /* Pixel character art from approved concept sheet */
 .player .face,.npc .face{font-size:0!important;width:64px;height:70px;display:block;background-size:contain;background-position:center bottom;background-repeat:no-repeat;image-rendering:pixelated}
 .player .face{background-image:url('./hero_front.png')}
-.npc[data-id="girl"] .face,.npc[data-id="friend"] .face,.npc[data-id="boy"] .face{background-image:url('./hero_front.png')}
+
 .npc[data-id="rabbit"] .face{background-image:url('./rabbit0.png')}
 .npc[data-id="squirrel"] .face{background-image:url('./squirrel0.png')}
 .npc[data-id="cat"] .face{background-image:url('./cat0.png')}
 .npc[data-id="dog"] .face{background-image:url('./dog0.png')}
 .companion{font-size:0!important;width:56px;height:62px;background-size:contain;background-position:center bottom;background-repeat:no-repeat;image-rendering:pixelated}
-.portrait{font-size:0!important;background-size:contain;background-repeat:no-repeat;background-position:center}
+.portrait{background-size:contain;background-repeat:no-repeat;background-position:center}
+.npc:not([data-id="rabbit"]):not([data-id="squirrel"]):not([data-id="cat"]):not([data-id="dog"]) .face{font-size:47px!important;background-image:none!important} 
+.npc[data-id="mom"] .face{background-image:url('./mom.png')!important;font-size:0!important}
+.npc[data-id="girl"] .face{background-image:url('./girl.png')!important;font-size:0!important}
+.npc[data-id="boy"] .face{background-image:url('./boy.png')!important;font-size:0!important}
+.npc[data-id="friend"] .face{background-image:url('./friend.png')!important;font-size:0!important}
+.npc[data-id="mom"] .face,.npc[data-id="girl"] .face,.npc[data-id="boy"] .face,.npc[data-id="friend"] .face{width:58px;height:72px;background-size:contain;background-repeat:no-repeat;background-position:center bottom}
 </style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
 <div class="path h"></div><div class="path v"></div><div class="path p2"></div><div class="water"></div>
 <div class="building home"><div class="box">🏠</div><small>🏠 HOME</small></div><div class="building shop"><div class="box">🛒</div><small>SUPERMARKET</small></div><div class="building bakery"><div class="box">🥐</div><small>🥐 BAKERY</small></div><div class="building academy"><div class="box">🎹</div><small>🎹 PIANO</small></div><div class="building school"><div class="box">🏫</div><small>🏫 SCHOOL</small></div>
@@ -94,7 +100,7 @@ function setPlayer(){player.style.left=px+'px';player.style.top=py+'px';trail.pu
 function collides(nx,ny){return [[75,135,215,185],[495,65,225,190],[855,140,225,190],[1460,95,270,230],[60,720,510,330],[565,790,200,190],[780,790,200,190],[995,790,200,190],[1210,790,200,190],[1425,790,200,190]].some(([x,y,w,h])=>nx+50>x&&nx<x+w&&ny+65>y&&ny<y+h)}
 function move(dx,dy){if(locked)return;heroDir=dy<0?'back':'front';heroMovingUntil=Date.now()+280;const nx=clamp(px+dx*speed,0,1740),ny=clamp(py+dy*speed,0,1040);if(!collides(nx,ny)){px=nx;py=ny;setPlayer()}}
 function nearest(){let best=null,dist=1e9;Object.entries(npcs).forEach(([id,n])=>{let d=Math.hypot(px-n.x,py-n.y);if(d<dist){dist=d;best=id}});return dist<115?best:null}
-function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'rabbit0','🐿️':'squirrel0','🐱':'cat0','🐶':'dog0','👧🏻':'hero_front','👧🏽':'hero_front','🧒🏻':'hero_front'})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
+function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'rabbit0','🐿️':'squirrel0','🐱':'cat0','🐶':'dog0',})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
 function button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);choices.appendChild(b);return b}
 function closeDialog(){dialog.classList.remove('show');locked=false;afterDialog()}
 function modeFor(id){if(!questionModes[id]){questionModeCount++;questionModes[id]=(questionModeCount%4===0)?'required':'optional';}return questionModes[id]}
@@ -128,12 +134,12 @@ function flash(msg){toast.textContent=msg;toast.classList.add('show');setTimeout
 document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('click',()=>move(+b.dataset.dx,+b.dataset.dy)));$('talk').addEventListener('click',()=>{if(locked)return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});document.querySelectorAll('.npc').forEach(b=>b.addEventListener('click',()=>{if(locked)return;const id=b.dataset.id,n=npcs[id];Math.hypot(px-n.x,py-n.y)<135?talk(id):flash('가까이 가서 말을 걸어보자!')}));window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(locked){if(e.key==='Escape')closeDialog();return}const k={ArrowUp:[0,-1],w:[0,-1],W:[0,-1],ArrowDown:[0,1],s:[0,1],S:[0,1],ArrowLeft:[-1,0],a:[-1,0],A:[-1,0],ArrowRight:[1,0],d:[1,0],D:[1,0]};if(k[e.key]){e.preventDefault();move(...k[e.key])}else if(e.key==='Enter'||e.key===' '){const id=nearest();id?talk(id):flash('주변에 이야기할 친구가 없어!')}});document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
 
-const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',girl:'hero',friend:'hero',boy:'hero'};
+const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',};
 let heroDir='front',heroMovingUntil=0,frameIndex=0;
 function spriteTick(){frameIndex++;const moving=Date.now()<heroMovingUntil;
  const heroFrame=moving?'hero_walk'+(frameIndex%4):(heroDir==='back'?'hero_back':'hero_front');
  const hface=player.querySelector('.face');if(hface)hface.style.backgroundImage="url('./"+heroFrame+".png')";
- document.querySelectorAll('.npc').forEach((el,i)=>{const type=spriteTypes[el.dataset.id];if(!type)return;const frame=type==='hero'?'hero_front':type+Math.floor((frameIndex+i*2)/3)%4;el.querySelector('.face').style.backgroundImage="url('./"+frame+".png')"});
+ document.querySelectorAll('.npc').forEach((el,i)=>{const type=spriteTypes[el.dataset.id];if(!type)return;const frame=type+Math.floor((frameIndex+i*2)/3)%4;el.querySelector('.face').style.backgroundImage="url('./"+frame+".png')"});
  if(pet){const type=pets.find(x=>x[0]===pet)?.[0];if(type)companion.style.backgroundImage="url('./"+type+(frameIndex%4)+".png')"}
 }
 setInterval(spriteTick,165);spriteTick();
