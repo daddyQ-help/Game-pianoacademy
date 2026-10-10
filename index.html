@@ -25,7 +25,16 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 .npc[data-id="boy"] .face{background-image:url('./boy.png')!important;font-size:0!important}
 .npc[data-id="friend"] .face{background-image:url('./friend.png')!important;font-size:0!important}
 .npc[data-id="mom"] .face,.npc[data-id="girl"] .face,.npc[data-id="boy"] .face,.npc[data-id="friend"] .face{width:58px;height:72px;background-size:contain;background-repeat:no-repeat;background-position:center bottom}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
+.hair-open{position:absolute;right:12px;top:58px;z-index:22;border:3px solid #754d36;background:#ffedb8;border-radius:12px;padding:7px 10px;color:#65412d;font-weight:900}
+.hair-overlay{position:fixed;inset:0;z-index:100;background:#3327199e;display:none;align-items:center;justify-content:center;padding:12px}.hair-overlay.active{display:flex}
+.hair-panel{width:min(740px,100%);max-height:90dvh;overflow:auto;background:#fff7de;border:5px solid #714b34;border-radius:20px;padding:16px;color:#60402d;box-shadow:0 8px #a5744e}
+.hair-heading{font-weight:1000;font-size:23px;margin-bottom:4px}.hair-note{font-size:14px;margin-bottom:12px}
+.hair-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.hair-option{min-width:0;background:#fff0cf;border:3px solid #e0caa7;border-radius:12px;padding:5px 2px;color:#593a29;font-weight:900;display:flex;flex-direction:column;align-items:center}
+.hair-option.selected{border-color:#e9a937;background:#ffe6a2}.hair-option img{height:100px;width:100%;object-fit:contain;image-rendering:pixelated}.hair-option span{font-size:12px;white-space:nowrap}
+.hair-actions{display:flex;justify-content:center;gap:10px;margin-top:16px}.hair-actions button{background:#ffe6a2;border:3px solid #754d36;border-radius:12px;padding:10px 15px;font-weight:900;color:#5b3a29}
+@media(max-width:500px){.hair-panel{padding:10px}.hair-option img{height:80px}.hair-option span{font-size:10px}.hair-heading{font-size:19px}.hair-open{top:53px;font-size:12px}}
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world">
 <div class="path h"></div><div class="path v"></div><div class="path p2"></div><div class="water"></div>
 <div class="building home"><div class="box">🏠</div><small>🏠 HOME</small></div><div class="building shop"><div class="box">🛒</div><small>SUPERMARKET</small></div><div class="building bakery"><div class="box">🥐</div><small>🥐 BAKERY</small></div><div class="building academy"><div class="box">🎹</div><small>🎹 PIANO</small></div><div class="building school"><div class="box">🏫</div><small>🏫 SCHOOL</small></div>
 <div class="building petshop"><div class="box">🐾</div><small>🐾 PET SHOP</small></div>
@@ -39,6 +48,10 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 <button class="npc" data-id="dog" style="left:650px;top:530px"><span class="face">🐶</span><span class="bubble">…</span></button><button class="npc" data-id="fox" style="left:980px;top:530px"><span class="face">🦊</span><span class="bubble">?</span></button><button class="npc" data-id="duck" style="left:780px;top:685px"><span class="face">🦆</span></button><button class="npc" data-id="hedgehog" style="left:550px;top:685px"><span class="face">🦔</span></button><button class="npc" data-id="friend" style="left:1390px;top:510px"><span class="face">👧🏽</span><span class="bubble">…</span></button><button class="npc" data-id="bear" style="left:1570px;top:680px"><span class="face">🐻</span></button><button class="npc" data-id="bird" style="left:1030px;top:690px"><span class="face">🐦</span></button><div id="companion" class="companion" style="display:none">🐰</div><div class="player" id="player" style="left:245px;top:520px"><span class="face">👧🏻</span></div></div>
 <div class="quest" id="quest">목표: 피아노 학원으로 가기</div><div class="hint">가까이 가서 A · 화살표/WASD 이동</div><div class="toast" id="toast"></div><div class="controls"><button class="up" data-dx="0" data-dy="-1">▲</button><button class="left" data-dx="-1" data-dy="0">◀</button><button class="down" data-dx="0" data-dy="1">▼</button><button class="right" data-dx="1" data-dy="0">▶</button></div><button class="talk" id="talk">A</button>
 <div class="dialog" id="dialog"><div class="drow"><div class="portrait" id="portrait">👧🏻</div><div><div class="speaker" id="speaker">나</div><div class="text" id="dialogText"></div><div class="choices" id="choices"></div></div></div></div></div></div></div>
+<button id="changeHair" class="hair-open" type="button">✂️ 머리 바꾸기</button>
+<div id="hairOverlay" class="hair-overlay" role="dialog" aria-modal="true" aria-label="머리 스타일 선택"><div class="hair-panel">
+<div class="hair-heading">🎀 머리 스타일 선택</div><div class="hair-note">어떤 머리가 마음에 들어? 언제든지 다시 바꿀 수 있어!</div>
+<div id="hairOptions" class="hair-options"></div><div class="hair-actions"><button id="hairCancel" type="button">취소</button><button id="hairConfirm" type="button">✓ 이 머리로 시작하기</button></div></div></div>
 <script>
 (()=>{
 const $=id=>document.getElementById(id), world=$('world'),vp=$('viewport'),player=$('player'),dialog=$('dialog'),portrait=$('portrait'),speaker=$('speaker'),text=$('dialogText'),choices=$('choices'),toast=$('toast'),count=$('talkCount');
@@ -135,14 +148,23 @@ document.querySelectorAll('.controls button').forEach(b=>b.addEventListener('cli
 let lastTouch=0;document.addEventListener('touchend',e=>{if(e.target.closest('input,textarea'))return;const now=Date.now();if(now-lastTouch<300)e.preventDefault();lastTouch=now},{passive:false});
 
 const spriteTypes={rabbit:'rabbit',squirrel:'squirrel',cat:'cat',dog:'dog',};
+const hairNames=['긴머리','긴 생머리','단발머리','대머리','모히칸'];
+let hairStyle=0,hairDraft=0,hairFirst=false;
+try{const saved=localStorage.getItem('pianoRoadHairStyle');if(saved!==null){hairStyle=Math.max(0,Math.min(4,Number(saved)||0));hairFirst=true}}catch(e){}
+const hairOverlay=$('hairOverlay'),hairOptions=$('hairOptions');
+function renderHairOptions(){hairOptions.innerHTML='';hairNames.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className='hair-option'+(i===hairDraft?' selected':'');const im=document.createElement('img');im.src='./hair'+i+'_thumb.png';im.alt=name;const label=document.createElement('span');label.textContent=name;b.append(im,label);b.addEventListener('click',()=>{hairDraft=i;renderHairOptions()});hairOptions.appendChild(b)})}
+function showHair(){hairDraft=hairStyle;renderHairOptions();hairOverlay.classList.add('active');locked=true}
+function hideHair(){hairOverlay.classList.remove('active');locked=false}
+$('changeHair').addEventListener('click',showHair);$('hairCancel').addEventListener('click',hideHair);
+$('hairConfirm').addEventListener('click',()=>{hairStyle=hairDraft;try{localStorage.setItem('pianoRoadHairStyle',String(hairStyle))}catch(e){}hideHair();spriteTick()});
 let heroDir='front',heroMovingUntil=0,frameIndex=0;
 function spriteTick(){frameIndex++;const moving=Date.now()<heroMovingUntil;
- const heroFrame=moving?'hero_walk'+(frameIndex%4):(heroDir==='back'?'hero_back':'hero_front');
+ const heroFrame='hair'+hairStyle+'_'+(moving?'walk'+(frameIndex%4):'front');
  const hface=player.querySelector('.face');if(hface)hface.style.backgroundImage="url('./"+heroFrame+".png')";
  document.querySelectorAll('.npc').forEach((el,i)=>{const type=spriteTypes[el.dataset.id];if(!type)return;const frame=type+Math.floor((frameIndex+i*2)/3)%4;el.querySelector('.face').style.backgroundImage="url('./"+frame+".png')"});
  if(pet){const type=pets.find(x=>x[0]===pet)?.[0];if(type)companion.style.backgroundImage="url('./"+type+(frameIndex%4)+".png')"}
 }
 setInterval(spriteTick,165);spriteTick();
-window.addEventListener('resize',camera);setPlayer();setTimeout(()=>{say({face:'👩🏻',name:'엄마'},'피아노 학원 잘 다녀와! 친구들을 만나면 인사도 해보렴.');button('응! 다녀올게!',closeDialog);button('엄마, 이따 봐!',closeDialog)},350);
+window.addEventListener('resize',camera);setPlayer();setTimeout(()=>{say({face:'👩🏻',name:'엄마'},'피아노 학원 잘 다녀와! 친구들을 만나면 인사도 해보렴.');button('응! 다녀올게!',closeDialog);button('엄마, 이따 봐!',closeDialog);if(!hairFirst)setTimeout(showHair,250)},350);
 })();
 </script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./sw.js').then(async reg=>{try{await reg.update()}catch(e){} }).catch(err=>console.warn('Offline setup:',err))})}</script></body></html>
