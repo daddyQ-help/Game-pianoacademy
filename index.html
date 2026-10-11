@@ -65,7 +65,15 @@ input{user-select:text;-webkit-user-select:text;touch-action:auto}
 .npc .bubble{font-size:15px!important}.npc[data-id='boy'],.npc[data-id='friend'],.npc[data-id='hedgehog'],.npc[data-id='bird']{opacity:0!important}
 @keyframes npcIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 .npc .face{animation:npcIdle 1.3s ease-in-out infinite}
-</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div class="viewport" id="viewport"><div class="world" id="world"><div class="map-renumber academy-number">12</div><div class="map-renumber park-number">2</div>
+
+.mission-bar{position:absolute;z-index:32;top:9px;left:12px;right:12px;max-width:550px;background:#fff3cf;border:3px solid #754d36;border-radius:12px;padding:9px 12px;color:#65412d;font-size:13px;font-weight:900;box-shadow:0 3px #986d4a;pointer-events:none}
+.mission-bar small{display:block;font-size:11px;color:#a05c34}
+.mission-menu{position:absolute;right:12px;top:66px;z-index:31;border:3px solid #754d36;border-radius:12px;background:#ffebb0;color:#5c3a28;font-weight:900;padding:8px}
+.music-toggle{position:absolute;right:12px;top:110px;z-index:31;border:3px solid #754d36;border-radius:12px;background:#ffebb0;color:#5c3a28;font-weight:900;padding:8px}
+.dialog .portrait{background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
+.npc .face{background-size:contain!important;background-position:center!important;background-repeat:no-repeat!important}
+@media(max-width:600px){.mission-bar{top:8px;right:105px;font-size:11px;padding:6px 8px}.mission-menu{top:63px;font-size:11px}.music-toggle{top:102px;font-size:11px}}
+</style><link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#f7e8c6"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="PIANO ROAD"><link rel="apple-touch-icon" href="./icon-180.png"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-180.png"></head><body><div class="game"><div class="hud"><div><div class="logo">🎹 PIANO ROAD</div><div style="font-size:11px">피아노 학원 가는 길</div></div><div class="chips"><div class="chip">DAY 1</div><div class="chip">💬 <span id="talkCount">0</span></div></div></div><div id="missionBar" class="mission-bar"><small>미션 1 / 4</small>③ BOOKSTORE에서 피아노 책 사기</div><button type="button" id="missionMenu" class="mission-menu">📋 미션</button><button type="button" id="musicToggle" class="music-toggle">♫ 음악 OFF</button><div class="viewport" id="viewport"><div class="world" id="world"><div class="map-renumber academy-number">12</div><div class="map-renumber park-number">2</div>
 <button class="npc" data-id="girl" style="left:330px;top:410px" aria-label="동물 친구 girl"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="rabbit" style="left:750px;top:490px" aria-label="동물 친구 rabbit"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="squirrel" style="left:865px;top:595px" aria-label="동물 친구 squirrel"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="cat" style="left:1090px;top:410px" aria-label="동물 친구 cat"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="boy" style="left:610px;top:820px" aria-label="동물 친구 boy"><span class="face"></span><span class="bubble">…</span></button>
 <button class="npc" data-id="dog" style="left:420px;top:640px" aria-label="동물 친구 dog"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="fox" style="left:1170px;top:795px" aria-label="동물 친구 fox"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="duck" style="left:780px;top:1000px" aria-label="동물 친구 duck"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="hedgehog" style="left:350px;top:980px" aria-label="동물 친구 hedgehog"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="friend" style="left:560px;top:970px" aria-label="동물 친구 friend"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="bear" style="left:1470px;top:510px" aria-label="동물 친구 bear"><span class="face"></span><span class="bubble">…</span></button><button class="npc" data-id="bird" style="left:1150px;top:970px" aria-label="동물 친구 bird"><span class="face"></span><span class="bubble">…</span></button><div id="companion" class="companion" style="display:none">🐰</div><div class="player" id="player" style="left:235px;top:380px"><span class="face">👧🏻</span></div></div>
 <div class="quest" id="quest">① HOME 출발 → ⑫ PIANO ACADEMY</div><div class="hint">왼쪽 원형 패드로 이동 · A 대화</div><div class="toast" id="toast"></div><div class="joystick" id="joystick" aria-label="이동 조이스틱"><div class="joystick-ring"></div><div class="joystick-knob" id="joystickKnob"></div></div><button class="talk" id="talk">A</button>
@@ -80,7 +88,8 @@ const $=id=>document.getElementById(id), world=$('world'),vp=$('viewport'),playe
 let px=235,py=380,locked=false,talks=0,firstQuestion=true,answered=0;const speed=20,autoSeen={},completed={}; const questionModes={}; let questionModeCount=0;
 let bonusReady=false,bonusActive=false,bonusWon=false,pet=null;
 const pets=[['rabbit','🐰','토끼'],['squirrel','🐿️','다람쥐'],['cat','🐱','고양이'],['dog','🐶','강아지']];
-try{pet=localStorage.getItem('pianoRoadPet')||null}catch(e){}
+// A new journey always begins without a follower; unlock after three correct answers.
+pet=null;
 let trail=[];const companion=$('companion');
 function updatePet(){if(!pet){companion.style.display='none';return}const found=pets.find(a=>a[0]===pet);if(!found)return;companion.textContent='';companion.style.display='block';const at=trail[Math.max(0,trail.length-5)]||{x:px-55,y:py+12};companion.style.left=at.x+'px';companion.style.top=at.y+'px'}
 function choosePet(){bonusActive=false;bonusWon=true;say({face:'🐿️',name:'다람쥐'},'우와! 정답이야! 이제 어떤 동물 친구와 함께 갈래?');pets.forEach(([id,emoji,name])=>{const b=button(emoji+' '+name,()=>{pet=id;try{localStorage.setItem('pianoRoadPet',id)}catch(e){};trail=[{x:px-55,y:py+12}];updatePet();say({face:emoji,name:name},'야호! 이제부터 내가 뒤를 따라갈게! 💛');button('함께 출발!',closeDialog)});b.classList.add('pet-card')})}
@@ -91,7 +100,92 @@ function bonusQuestion(){bonusActive=true;const n={face:'🐿️',name:'특별�
  show();
 }
 function squirrelVisit(){if(bonusWon||bonusActive||!bonusReady||locked)return;bonusReady=false;bonusActive=true;say({face:'🐿️',name:'다람쥐'},'언니~! 문제를 세 개나 맞혔다며? 🐿️ 특별한 문제를 맞히면 좋아하는 동물 친구가 따라다닐 거야!');button('도전할래!',bonusQuestion);button('조금 있다가!',()=>{bonusActive=false;bonusReady=true;closeDialog()})}
-function afterDialog(){if(answered>=3&&!bonusWon&&!bonusActive&&!pet)bonusReady=true;if(bonusReady&&!pet)setTimeout(squirrelVisit,350)}
+function afterDialog(){if(window.pendingCoupon){window.pendingCoupon=false;setTimeout(couponAward,400);return}if(answered>=3&&!bonusWon&&!bonusActive&&!pet)bonusReady=true;if(bonusReady&&!pet)setTimeout(squirrelVisit,350)}
+
+
+const missions=[
+ {title:'③ BOOKSTORE에서 피아노 책 사기',short:'책 구입',x:850,y:440,item:'📘 피아노 책'},
+ {title:'⑥ SUPER MARKET에서 간식 재료 찾기',short:'재료 찾기',x:270,y:680,item:'🛒 간식 재료'},
+ {title:'⑨ FLOWER SHOP에서 꽃 선물하기',short:'꽃 선물',x:255,y:975,item:'💐 꽃다발'},
+ {title:'⑫ PIANO ACADEMY에 도착하기',short:'학원 도착',x:570,y:340,item:'🎹 도착'}
+];
+let missionIndex=0,missionBusy=false,coupons=[],lastQuestion='',missionDone=false;
+const missionBar=$('missionBar');
+function updateMission(){
+ missionBar.innerHTML=missionDone?'<small>🎉 모든 미션 완료!</small>피아노 학원에 잘 도착했어!':`<small>미션 ${missionIndex+1} / 4 · ${missions[missionIndex].item}</small>${missions[missionIndex].title}`;
+}
+function uniqueQuestion(){
+ let q,attempt=0;do{q=questionFor(null);attempt++}while(q.story===lastQuestion&&attempt<8);
+ lastQuestion=q.story;return q;
+}
+function missionCheck(){
+ if(locked||missionDone||missionBusy)return false;
+ const m=missions[missionIndex];
+ if(Math.hypot(px-m.x,py-m.y)>135)return false;
+ missionBusy=true;
+ if(missionIndex===3){say({face:'👧🏻',name:'피아노 선생님'},'와! 책과 간식 재료, 꽃까지 모두 챙겨왔구나! 피아노 학원에 온 걸 환영해!');button('오늘의 모험 끝!',()=>{missionDone=true;missionBusy=false;updateMission();closeDialog()});return true}
+ say({face:missionIndex===0?'🐿️':missionIndex===1?'🐧':'🐰',name:missionIndex===0?'서점 친구':missionIndex===1?'마켓 친구':'꽃집 친구'},m.title+'! 돈 대신 수학 문제를 풀면 선물로 줄게!');
+ button('문제 풀기',()=>missionMath());
+ button('조금 있다가',()=>{missionBusy=false;closeDialog()});
+ return true;
+}
+function missionMath(){
+ const m=missions[missionIndex],q=uniqueQuestion();let tries=0;
+ function render(note=''){
+  say({face:missionIndex===0?'🐿️':missionIndex===1?'🐧':'🐰',name:'가게 친구'},q.story);
+  const wrap=document.createElement('div');wrap.className='number-entry';
+  const inp=document.createElement('input');inp.type='text';inp.inputMode='numeric';inp.placeholder='?';inp.maxLength=3;
+  const check=document.createElement('button');check.textContent='확인 ✓';wrap.append(inp,check);choices.appendChild(wrap);
+  const pad=document.createElement('div');pad.className='pad';choices.appendChild(pad);
+  for(const v of ['1','2','3','4','5','6','7','8','9','←','0','지우기']){const b=document.createElement('button');b.textContent=v;b.type='button';b.onclick=()=>{if(v==='←')inp.value=inp.value.slice(0,-1);else if(v==='지우기')inp.value='';else if(inp.value.length<3)inp.value+=v};pad.appendChild(b)}
+  const hint=document.createElement('div');hint.className='feedback';hint.textContent=note;choices.appendChild(hint);
+  function submit(){if(!/^\d{1,3}$/.test(inp.value)){hint.textContent='숫자를 적어줘~';return}
+   if(Number(inp.value)===q.answer){
+    answered++;missionIndex++;missionBusy=false;updateMission();
+    say({face:'🐰',name:'가게 친구'},'정답! '+m.item+'을(를) 받았어! 🌟');button('다음 미션으로!',closeDialog);return;
+   }
+   tries++;inp.value='';if(tries===1){hint.textContent='아깝다! 한 번 더 생각해 보자 💛';return}
+   say({face:'🐰',name:'가게 친구'},'두 번이나 도전했어! 잘했어. 힌트를 보고 다시 풀어보자!');
+   button('다시 도전',()=>render('천천히 하나씩 세어봐. 할 수 있어!'));
+   button('나중에 다시',()=>{missionBusy=false;closeDialog()});
+  }
+  check.onclick=submit;inp.onkeydown=e=>{if(e.key==='Enter')submit()};
+ }
+ render();
+}
+function couponAward(){
+ const choice=['🧃 주스','🥛 초코우유','🍨 초코아이스크림'];
+ say({face:'🐰',name:'카페 토끼'},`수학 문제 ${answered}개를 맞혔어! 축하해! 카페 쿠폰으로 무엇을 먹고 싶어?`);
+ choice.forEach(label=>button(label,()=>{coupons.push(label);say({face:'🐰',name:'카페 토끼'},label+' 쿠폰을 받았어! 🎟️');button('고마워!',closeDialog)}));
+}
+function showMissions(){
+ say({face:'📋',name:'미션 · 친구 · 쿠폰'},missions.map((m,i)=>(i<missionIndex?'✅ ':i===missionIndex?'▶ ':'▫ ')+m.title).join('\n')+'\n\n동물 친구: '+(pet||'아직 없음')+'\n카페 쿠폰: '+(coupons.join(', ')||'아직 없음'));
+ button('닫기',closeDialog);
+}
+$('missionMenu').addEventListener('click',showMissions);
+updateMission();
+// Soft, looped piano melody using Web Audio; only starts after a user gesture on iOS.
+let audioCtx=null,musicTimer=null,musicOn=false,musicStep=0;
+const melody=[60,64,67,72,69,67,64,60,62,65,69,72,67,65,62,60];
+function note(freq,duration,volume){
+ const osc=audioCtx.createOscillator(),gain=audioCtx.createGain();
+ osc.type='sine';osc.frequency.value=freq;
+ gain.gain.setValueAtTime(0.0001,audioCtx.currentTime);
+ gain.gain.exponentialRampToValueAtTime(volume,audioCtx.currentTime+.03);
+ gain.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+duration);
+ osc.connect(gain).connect(audioCtx.destination);osc.start();osc.stop(audioCtx.currentTime+duration+.02);
+}
+function musicBeat(){
+ if(!audioCtx||audioCtx.state!=='running')return;
+ const midi=melody[musicStep%melody.length];note(440*Math.pow(2,(midi-69)/12),.7,.025);
+ if(musicStep%4===0)note(440*Math.pow(2,(midi-81)/12),1.5,.012);
+ musicStep++;
+}
+$('musicToggle').addEventListener('click',async()=>{
+ if(musicOn){clearInterval(musicTimer);musicTimer=null;musicOn=false;$('musicToggle').textContent='♫ 음악 OFF';return}
+ const Audio=window.AudioContext||window.webkitAudioContext;if(!Audio){flash('음악을 재생할 수 없는 브라우저야');return}
+ if(!audioCtx)audioCtx=new Audio();await audioCtx.resume();musicOn=true;musicBeat();musicTimer=setInterval(musicBeat,470);$('musicToggle').textContent='♫ 음악 ON';
+});
 
 const fruitNames=['도토리','당근','사과','밤','딸기','귤'];
 function fruitQuestion(){
@@ -132,10 +226,22 @@ const npcs={
 function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function camera(){const vw=vp.clientWidth,vh=vp.clientHeight;world.style.transform=`translate(${-clamp(px-vw/2+29,0,Math.max(0,1800-vw))}px,${-clamp(py-vh/2+36,0,Math.max(0,1200-vh))}px)`}
 function setPlayer(){player.style.left=px+'px';player.style.top=py+'px';trail.push({x:px,y:py});if(trail.length>15)trail.shift();updatePet();camera();checkAuto();if(px>540&&px<780&&py>305&&py<435&&!window.__pianoArrived){window.__pianoArrived=true;flash("🎹 PIANO ACADEMY 도착! 잘했어!")}}
+const walkPaths=[
+ [[235,380],[350,420],[490,480],[650,460],[850,440],[1070,460],[1260,460],[1480,480]],
+ [[350,420],[340,570],[270,680],[290,820],[255,975]],
+ [[650,460],[720,570],[840,680],[960,795],[1050,945]],
+ [[850,440],[730,360],[570,340]],
+ [[1070,460],[1100,610],[1170,795],[1200,960]],
+ [[270,680],[450,700],[610,820],[780,1000]],
+ [[255,975],[430,970],[560,970],[780,1000],[1050,945],[1200,960]]
+];
+function distSegment(x,y,a,b){
+ const dx=b[0]-a[0],dy=b[1]-a[1],t=Math.max(0,Math.min(1,((x-a[0])*dx+(y-a[1])*dy)/(dx*dx+dy*dy||1)));
+ return Math.hypot(x-a[0]-t*dx,y-a[1]-t*dy);
+}
 function collides(nx,ny){
- const cx=nx+29,cy=ny+64;
- const solids=[[0,100,285,185],[480,85,290,165],[820,125,310,150],[1270,155,270,130],[1545,275,255,125],[0,520,310,110],[1030,510,260,95],[1390,540,360,110],[0,850,280,105],[405,850,280,100],[980,850,280,110]];
- return solids.some(([x,y,w,h])=>cx>x&&cx<x+w&&cy>y&&cy<y+h)
+ const x=nx,y=ny;
+ return !walkPaths.some(path=>path.some((p,i)=>i>0&&distSegment(x,y,path[i-1],p)<78));
 }
 function move(dx,dy,amount=20){
  if(locked)return;
@@ -149,7 +255,7 @@ function move(dx,dy,amount=20){
  setPlayer();
 }
 function nearest(){let best=null,dist=1e9;Object.entries(npcs).forEach(([id,n])=>{let d=Math.hypot(px-n.x,py-n.y);if(d<dist){dist=d;best=id}});return dist<115?best:null}
-function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'rabbit0','🐿️':'squirrel0','🐱':'cat0','🐶':'dog0',})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
+function say(n,msg){locked=true;dialog.classList.add('show');portrait.textContent='';const ptype=({'🐰':'npc_rabbit','🐿️':'npc_squirrel','🐱':'npc_cat','🐶':'npc_dog','🦊':'npc_fox','🐻':'npc_bear','🦆':'npc_penguin','👧🏻':'npc_girl'})[n.face];portrait.style.backgroundImage=ptype?`url('./${ptype}.png')`:'';if(!ptype)portrait.textContent=n.face;speaker.textContent=n.name;text.textContent=msg;choices.innerHTML=''}
 function button(label,fn){const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',fn);choices.appendChild(b);return b}
 function closeDialog(){dialog.classList.remove('show');locked=false;afterDialog()}
 function modeFor(id){if(!questionModes[id]){questionModeCount++;questionModes[id]=(questionModeCount%4===0)?'required':'optional';}return questionModes[id]}
@@ -165,7 +271,7 @@ function inputQuestion(n,q){
   for(const v of ['1','2','3','4','5','6','7','8','9','←','0','지우기']){const b=document.createElement('button');b.type='button';b.textContent=v;b.addEventListener('click',()=>{if(v==='←')inp.value=inp.value.slice(0,-1);else if(v==='지우기')inp.value='';else if(inp.value.length<3)inp.value+=v});pad.appendChild(b)}
   const feedback=document.createElement('div');feedback.className='feedback';feedback.textContent=hint;choices.appendChild(feedback);
   const check=()=>{const val=inp.value.trim();if(!/^\d{1,3}$/.test(val)){feedback.textContent='숫자를 적어줘~';return}
-   if(Number(val)===q.answer){answered++;completed[id]=true;say(n,n.reply+' 🌟 정답이야!');button('고마워! 계속 가기',closeDialog);return}
+   if(Number(val)===q.answer){answered++;if(answered%3===0&&answered<=12)setTimeout(()=>{if(!locked)couponAward();else window.pendingCoupon=true},700);completed[id]=true;say(n,n.reply+' 🌟 정답이야!');button('고마워! 계속 가기',closeDialog);return}
    wrongAttempts++;inp.value='';
    if(wrongAttempts===1){feedback.textContent='앗, 조금 다르네! 괜찮아~ 한 번만 더 생각해 볼까? 💛';return}
    if(!required){say(n,'잉, 이번에도 조금 달랐네! 그래도 두 번이나 도전하다니 멋져! 다음에 다시 잘 알려줘~ 💛');setTimeout(()=>{if(dialog.classList.contains('show')&&speaker.textContent===n.name)closeDialog()},2300);return}
@@ -191,7 +297,7 @@ function updateStick(e){const r=stick.getBoundingClientRect(),cx=r.left+r.width/
 stick.addEventListener('pointerdown',e=>{e.preventDefault();stickPointer=e.pointerId;stick.setPointerCapture(e.pointerId);updateStick(e)});
 stick.addEventListener('pointermove',e=>{if(e.pointerId===stickPointer){e.preventDefault();updateStick(e)}});
 for(const event of ['pointerup','pointercancel','lostpointercapture'])stick.addEventListener(event,e=>{if(e.pointerId===stickPointer)resetStick()});
-$('talk').addEventListener('click',()=>{if(locked)return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});
+$('talk').addEventListener('click',()=>{if(locked)return;if(missionCheck())return;const id=nearest();if(bonusReady&&!pet)squirrelVisit();else id?talk(id):flash('조금 더 가까이 가보자!')});
 document.querySelectorAll('.npc').forEach(b=>b.addEventListener('click',()=>{if(locked)return;const id=b.dataset.id,n=npcs[id];Math.hypot(px-n.x,py-n.y)<135?talk(id):flash('가까이 가서 말을 걸어보자!')}));
 window.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA'].includes(document.activeElement.tagName))return;if(locked){if(e.key==='Escape')closeDialog();return}
  const k=e.key.toLowerCase();if(['arrowup','arrowdown','arrowleft','arrowright','w','a','s','d'].includes(k)){e.preventDefault();pressed.add(k)}
